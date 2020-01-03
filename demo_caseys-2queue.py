@@ -244,7 +244,6 @@ def main(yolo):
         # Calculating the frames processed per second by the model  
         fps  = ( fps + (1./(time.time()-t1)) ) / 2
         frame_count += 1
-        cv2.imshow('', frame)
 
         # Printing processing status to track completion
         op = "FPS_" + str(frame_count) + "/" + str(co) + ": " + str(round(fps, 2))
