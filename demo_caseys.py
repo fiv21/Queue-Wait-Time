@@ -253,7 +253,7 @@ def main(yolo):
     for k, v in store_track_dict.items():
          csv_row = {}
          csv_row = {csv_columns[0]: k, csv_columns[1]: round((queue_track_dict[k] / Input_FPS), 2), csv_columns[2]: round((v / Input_FPS), 2)}
-         if round((queue_track_dict[k] / Input_FPS), 2) > 1:
+         if round((queue_track_dict[k] / Input_FPS), 2) > 3:
              queue_unique_count += 1
              csv_data.append(csv_row)
 
