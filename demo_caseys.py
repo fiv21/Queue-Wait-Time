@@ -97,13 +97,6 @@ def main(yolo):
         if ret != True:
             break
 
-        maxIntensity = 255.0
-        phi = 1
-        theta = 1
-        newImage1 = (maxIntensity/phi)*(frame/(maxIntensity/theta))**1.3
-        frame = array(newImage1,dtype=uint8)
-        cv2.imwrite('testing.jpg', frame)
-
         if frame_count == 5000:
             break
 
