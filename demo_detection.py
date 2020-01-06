@@ -90,10 +90,15 @@ def main(yolo):
         indices = preprocessing.non_max_suppression(boxes, nms_max_overlap, scores)
         detections = [detections[i] for i in indices]
 
+        head_count = 0
+
         # Drawing bounding box detections for people inside the store
         for det in detections:
+            head_count += 1
             bbox = det.to_tlbr()
             cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255,0,0), 2)
+
+        cv2.putText(frame, str(head_count), (5, 5), 0, 3, (0, 255, 77), 2)
 
         # Write the frame onto the VideoWriter object
         out.write(frame)
