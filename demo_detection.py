@@ -98,7 +98,7 @@ def main(yolo):
             bbox = det.to_tlbr()
             cv2.rectangle(frame, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])), (255,0,0), 2)
 
-        cv2.putText(frame, str(head_count), (5, 5), 0, 3, (0, 255, 77), 2)
+        cv2.putText(frame, str(head_count), (50, 50), 0, 1.5, (0, 255, 77), 2)
 
         # Write the frame onto the VideoWriter object
         out.write(frame)
