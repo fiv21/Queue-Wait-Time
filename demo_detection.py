@@ -10,7 +10,7 @@ import cv2
 import csv
 import warnings
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageEnhance
 from yolo import YOLO
 from timeit import time
 from pylab import array, uint8
@@ -76,6 +76,17 @@ def main(yolo):
         if ret != True:
             break
         t1 = time.time()
+
+        step1 = cv2.edgePreservingFilter(frame, flags=1, sigma_s=15, sigma_r=0.1)
+        step2 = cv2.detailEnhance(step1, sigma_s=40, sigma_r=0.1)
+        cv2.imwrite('preprocessing.jpg', step2)
+
+        im = Image.open("preprocessing.jpg")
+        enhancer = ImageEnhance.Sharpness(im)
+        enhanced_im = enhancer.enhance(6.0)
+        enhanced_im.save("enhanced.jpg")
+
+        frame = cv2.imread('enhanced.jpg')
 
         image = Image.fromarray(frame[...,::-1])   # BGR to RGB conversion
         boxs = yolo.detect_image(image)
