@@ -110,14 +110,12 @@ def main(yolo):
         
         # Getting the detections having score of 0.0 to 1.0
         detections = [Detection(bbox, 1.0, feature) for bbox, feature in zip(boxs, features)]
-        print('Before NMS:', detections)
         
         # Run non-maxima suppression on the bounding boxes
         boxes = np.array([d.tlwh for d in detections])
         scores = np.array([d.confidence for d in detections])
         indices = preprocessing.non_max_suppression(boxes, nms_max_overlap, scores)
         detections = [detections[i] for i in indices]
-        print('After NMS:', detections)
         
         # Call the tracker to associate tracking boxes to detection boxes
         tracker.predict()
@@ -181,6 +179,7 @@ def main(yolo):
         # Drawing bounding box detections for people inside the store
         for det in detections:
             bbox = det.to_tlbr()
+            print(bbox)
 
             # Checking if the person is within an area of interest
             queue_point_test = center_point_inside_polygon(bbox, pts)
