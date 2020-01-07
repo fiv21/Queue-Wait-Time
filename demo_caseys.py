@@ -106,6 +106,7 @@ def main(yolo):
 
         image = Image.fromarray(frame[...,::-1])   # BGR to RGB conversion
         boxs = yolo.detect_image(image)
+        print(boxs)
         features = encoder(frame,boxs)
         
         # Getting the detections having score of 0.0 to 1.0
@@ -179,7 +180,6 @@ def main(yolo):
         # Drawing bounding box detections for people inside the store
         for det in detections:
             bbox = det.to_tlbr()
-            print(bbox)
 
             # Checking if the person is within an area of interest
             queue_point_test = center_point_inside_polygon(bbox, pts)
